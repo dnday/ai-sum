@@ -40,7 +40,7 @@ const ErrorMessage = ({ error, onDismiss }) => {
 
   return (
     <motion.div
-      className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4"
+      className="bg-gray-800 border border-red-400/30 rounded-lg p-4 mb-4"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
@@ -61,14 +61,14 @@ const ErrorMessage = ({ error, onDismiss }) => {
           </svg>
         </div>
         <div className="ml-3 flex-1">
-          <h3 className="text-sm font-medium text-red-800">Error</h3>
-          <p className="mt-1 text-sm text-red-700">{error}</p>
+          <h3 className="text-sm font-medium text-red-300">Error</h3>
+          <p className="mt-1 text-sm text-red-200">{error}</p>
         </div>
         {onDismiss && (
           <div className="ml-auto pl-3">
             <button
               onClick={onDismiss}
-              className="inline-flex rounded-md bg-red-50 p-1.5 text-red-500 hover:bg-red-100"
+              className="inline-flex rounded-md p-1.5 text-red-300 hover:bg-gray-700 transition-colors"
             >
               <span className="sr-only">Dismiss</span>
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -96,7 +96,7 @@ const ModelSelector = ({ model, setModel, loading, variants }) => (
     <div className="flex flex-col items-center space-y-2">
       <label
         htmlFor="model-select"
-        className="text-sm font-medium text-gray-700"
+        className="text-sm font-medium text-gray-300"
       >
         Pilih Model AI
       </label>
@@ -105,7 +105,7 @@ const ModelSelector = ({ model, setModel, loading, variants }) => (
         value={model}
         onChange={(e) => setModel(e.target.value)}
         disabled={loading}
-        className="p-3 border border-gray-200 rounded-lg shadow-sm bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed min-w-[250px]"
+        className="p-3 border border-gray-600 rounded-lg bg-gray-800 text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed min-w-[250px] shadow-lg"
         aria-label="Pilih model AI untuk meringkas teks"
       >
         {MODEL_OPTIONS.map((option) => (
@@ -133,12 +133,12 @@ const ActionButton = ({
   ariaLabel,
 }) => {
   const baseClasses =
-    "px-6 py-3 rounded-xl transition-all font-medium shadow-md disabled:opacity-50 disabled:cursor-not-allowed";
+    "px-6 py-3 rounded-xl transition-all font-medium shadow-lg disabled:opacity-50 disabled:cursor-not-allowed";
   const variantClasses = {
     primary:
-      "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700",
+      "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700",
     secondary:
-      "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 shadow-sm",
+      "bg-gray-700 border border-gray-600 text-gray-200 hover:bg-gray-600",
   };
 
   return (
@@ -166,7 +166,7 @@ ActionButton.propTypes = {
 const SummaryResult = ({ summary, loading, error, fadeInVariants }) => {
   if (error) {
     return (
-      <div className="text-red-600 p-4 bg-red-50 rounded-lg border border-red-200">
+      <div className="text-red-300 p-4 bg-gray-800 rounded-lg border border-red-400/30">
         <p className="font-medium">Terjadi kesalahan:</p>
         <p className="text-sm mt-1">{error}</p>
       </div>
@@ -181,12 +181,12 @@ const SummaryResult = ({ summary, loading, error, fadeInVariants }) => {
         aria-live="polite"
       >
         <motion.div
-          className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full"
+          className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           aria-hidden="true"
         />
-        <span className="ml-3 text-lg text-gray-600">
+        <span className="ml-3 text-lg text-gray-300">
           Memproses ringkasan...
         </span>
       </div>
@@ -199,11 +199,11 @@ const SummaryResult = ({ summary, loading, error, fadeInVariants }) => {
         variants={fadeInVariants}
         initial="hidden"
         animate="visible"
-        className="bg-green-50 border border-green-200 rounded-lg p-4"
+        className="bg-gray-800 border border-indigo-500/30 rounded-lg p-4"
       >
         <div className="flex items-center mb-2">
           <svg
-            className="h-5 w-5 text-green-400 mr-2"
+            className="h-5 w-5 text-indigo-400 mr-2"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -215,11 +215,11 @@ const SummaryResult = ({ summary, loading, error, fadeInVariants }) => {
               d="M5 13l4 4L19 7"
             />
           </svg>
-          <span className="text-green-800 font-medium">
+          <span className="text-indigo-300 font-medium">
             Ringkasan berhasil dibuat
           </span>
         </div>
-        <div className="prose max-w-none prose-headings:text-gray-800 prose-p:text-gray-700">
+        <div className="prose max-w-none prose-invert prose-headings:text-gray-200 prose-p:text-gray-300">
           <ReactMarkdown>{summary}</ReactMarkdown>
         </div>
       </motion.div>
@@ -227,7 +227,7 @@ const SummaryResult = ({ summary, loading, error, fadeInVariants }) => {
   }
 
   return (
-    <p className="text-gray-500 italic p-4 text-center">
+    <p className="text-gray-400 italic p-4 text-center">
       Hasil ringkasan teks akan muncul di sini setelah proses ringkasan selesai.
     </p>
   );
@@ -272,13 +272,13 @@ const Summarizer = ({
 
   return (
     <motion.div
-      className="space-y-6 max-w-4xl mx-auto"
+      className="space-y-6 max-w-4xl mx-auto p-4 md:p-6"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.h1
-        className="text-xl font-medium text-gray-800"
+        className="text-xl font-medium text-gray-200 text-center"
         variants={itemVariants}
       >
         Masukkan teks untuk diringkas:
@@ -302,7 +302,7 @@ const Summarizer = ({
         <div className="flex-1">
           <label
             htmlFor="input-text"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="block text-sm font-medium text-gray-300 mb-2"
           >
             Teks yang akan diringkas
           </label>
@@ -310,18 +310,18 @@ const Summarizer = ({
             id="input-text"
             value={inputText}
             onChange={handleTextChange}
-            className="w-full p-4 bg-white border border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed resize-vertical"
+            className="w-full p-4 bg-gray-800 border border-gray-600 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed resize-vertical text-gray-200"
             rows="6"
             placeholder="Masukkan teks di sini..."
             disabled={loading}
             aria-describedby="input-help"
           />
-          <p id="input-help" className="mt-1 text-sm text-gray-500">
+          <p id="input-help" className="mt-1 text-sm text-gray-400">
             Masukkan teks yang ingin Anda ringkas menggunakan AI
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
+        <div className="flex flex-col sm:flex-row lg:flex-col justify-center gap-3">
           <ActionButton
             onClick={handleSummarizeClick}
             disabled={isSubmitDisabled}
@@ -350,18 +350,18 @@ const Summarizer = ({
       </motion.div>
 
       <motion.section
-        className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
+        className="bg-gray-900 p-6 rounded-2xl shadow-xl border border-gray-700"
         variants={itemVariants}
         role="region"
         aria-labelledby="summary-heading"
       >
         <h2
           id="summary-heading"
-          className="text-2xl font-semibold mb-4 text-gray-800"
+          className="text-2xl font-semibold mb-4 text-gray-200"
         >
           Hasil Ringkasan
         </h2>
-        <div className="text-gray-700">
+        <div className="text-gray-300">
           <SummaryResult
             summary={summary}
             loading={loading}

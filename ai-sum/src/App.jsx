@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Summarizer from "./components/Summarizer";
 import History from "./components/History";
+import ExportSummary from "./components/ExportSummary";
+import UrlSummarizer from "./components/UrlSummarizer";
 
 const App = () => {
   const [inputText, setInputText] = useState("");
@@ -10,6 +12,7 @@ const App = () => {
   const [model, setModel] = useState("deepseek/deepseek-chat-v3-0324:free");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [urlLoading, setUrlLoading] = useState(false);
 
   // Load history from localStorage when component first mounts
   useEffect(() => {
@@ -17,6 +20,10 @@ const App = () => {
       JSON.parse(localStorage.getItem("summaryHistory")) || [];
     setHistory(storedHistory);
   }, []);
+
+  const handleTextExtracted = (extractedText) => {
+    setInputText(extractedText);
+  };
 
   const handleSummarize = async () => {
     if (inputText.trim() === "") return;
@@ -133,9 +140,17 @@ const App = () => {
   };
 
   return (
-    <div className="bg-gray-100 font-sans min-h-screen">
+    <div className="bg-slate-100 dark:bg-slate-900 font-sans min-h-screen">
       <Header title="AI Summarizer" />
-      <main className="max-w-3xl mx-auto p-4">
+      <main className="max-w-3xl mx-auto p-4 space-y-8 lg:space-y-12">
+        {/* URL Summarizer */}
+        <UrlSummarizer
+          onTextExtracted={handleTextExtracted}
+          isLoading={urlLoading}
+          setIsLoading={setUrlLoading}
+        />
+
+        {/* Main Summarizer */}
         <Summarizer
           inputText={inputText}
           setInputText={setInputText}
@@ -147,6 +162,13 @@ const App = () => {
           loading={loading}
           error={error}
         />
+
+        {/* Export Summary */}
+        {summary && (
+          <ExportSummary summary={summary} originalText={inputText} />
+        )}
+
+        {/* History */}
         <History
           history={history}
           handleDelete={handleDelete}
