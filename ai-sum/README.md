@@ -1,19 +1,17 @@
-/**\*\***\***\*\*** ✨ Windsurf Command 🌟 **\*\***\***\*\***/
-
 # AI Summarizer
 
-AI Summarizer is a web-based application that can summarize text content or entire webpages using advanced AI technology. This project leverages React, Vite, and the OpenRouter AI API to deliver efficient summarization capabilities.
+AI Summarizer is a web-based application that can summarize text content or entire webpages using advanced AI technology. This project leverages React, Vite, and th
+
+e OpenRouter AI API to deliver efficient summarization capabilities.
 
 ## Features
 
 - Text summarization
 - Webpage URL summarization
 - Copy summary to clipboard
-- User-friendly interface
+- User-friendly interface## How to Access
 
-## How to Access
-
-You can access the application by visiting [https://ai-summarizer.vercel.app](https://ai-summarizer.vercel.app).
+You can access the application by visiting [https://ai-sum-1jmt.vercel.app/]
 
 ## Project Setup
 
